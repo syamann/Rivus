@@ -1,0 +1,203 @@
+{% comment %}
+    Renders an article card for a given blog with settings to either show the image or not.
+
+    Accepts:
+    - blog: {Object} Blog object
+    - index: {Object} For loop index
+
+    Usage:
+    {% render 'article-card' blog: blog, article: article, show_image: section.settings.show_image %}
+{% endcomment %}
+
+{%- assign mod = index | modulo: 3 -%}
+
+<style>
+  .article-title {
+    font-weight: 500;
+    font-size: 28px;
+    line-height: 36px;
+    color: #000000;
+    margin-top:10px;
+  }
+
+  .article-date {
+    font-weight: 300;
+    font-size: 14px;
+    line-height: 36px; 
+    color: #B3B3B3;
+  }
+
+  .article-description {
+    font-weight: 300;
+    font-size: 15px;
+    line-height: 24px;
+    color: #000000;
+    margin-top:60px;
+    
+  }
+
+  .article-alt {
+    margin-top:24px !important;
+  }
+
+  .article-button {
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 24px;
+    text-decoration-line: underline;
+    margin-top:16px;
+    color: #000000;
+  }
+
+  .article-button:hover {
+    color: #000000;
+    opacity:0.7
+  }
+
+  .mobile-description {
+    display:none;
+  }
+
+  .desktop-description {
+    display:block;
+  }
+
+  @media screen and (max-width:750px) {
+    .article-title {
+      font-size: 12px;
+      line-height: 22px;
+      margin-top:0px 
+    }
+  
+    .article-date {
+      font-size: 8px;
+      line-height: 36px;
+
+    }
+  
+    .article-description {
+      font-size: 10px;
+      line-height: 18px;
+      margin-top:8px 
+    }
+  
+    .article-alt {
+      margin-top:8px !important;
+    }
+  
+    .article-button {
+      font-size: 12px;
+      line-height: 24px;
+    }
+
+    .mobile-description {
+      display:block;
+    }
+  
+    .desktop-description {
+      display:none;
+    }
+  }
+</style>
+
+{%- if mod == 0 -%}
+<div class="col-12" style="margin-bottom:60px">
+  <div class="row g-6">
+    <div class="col-12 col-md-6 d-flex align-items-center">
+      <img
+        srcset="{%- if article.image.src.width >= 165 -%}{{ article.image.src | img_url: '165x' }} 165w,{%- endif -%}
+          {%- if article.image.src.width >= 360 -%}{{ article.image.src | img_url: '360x' }} 360w,{%- endif -%}
+          {%- if article.image.src.width >= 533 -%}{{ article.image.src | img_url: '533x' }} 533w,{%- endif -%}
+          {%- if article.image.src.width >= 720 -%}{{ article.image.src | img_url: '720x' }} 720w,{%- endif -%}
+          {%- if article.image.src.width >= 1000 -%}{{ article.image.src | img_url: '1000x' }} 1000w,{%- endif -%}
+          {%- if article.image.src.width >= 1500 -%}{{ article.image.src | img_url: '1500x' }} 1500w,{%- endif -%}
+          {{ article.image.src | img_url: 'master' }} {{ article.image.src.width }}w"
+        src="{{ article.image.src | img_url: '533x' }}"
+        sizes="(min-width: {{ settings.page_width }}px) {{ settings.page_width | minus: 100 | divided_by: 2 }}px, (min-width: 750px) calc((100vw - 130px) / 2), calc((100vw - 50px) / 2)"
+        alt="{{ article.image.src.alt | escape }}"
+        width="100%"
+        loading="lazy"
+        class="motion-reduce"
+      >
+    </div>
+    <div class="col-12 col-md-6">
+      <div class="d-flex flex-column justify-content-center" style="height:100%">
+        <span class="circle-divider caption-with-letter-spacing article-date">
+          {{- article.published_at | time_tag: format: 'date' -}}
+        </span>
+        <h2 class="article-card__title article-title" id="Article-{{ article.id }}">
+          {{ article.title | escape }}
+        </h2>
+        {%- if article.excerpt.size > 0 or article.content.size > 0 -%}
+          <p class="article-card__excerpt rte-width article-description desktop-description">
+            {%- if article.excerpt.size > 0 -%}
+              {{ article.excerpt | strip_html | truncatewords: 100 }}
+            {%- else -%}
+              {{ article.content | strip_html | truncatewords: 100 }}
+            {%- endif -%}
+          </p>
+        {%- endif -%}
+        {%- if article.excerpt.size > 0 or article.content.size > 0 -%}
+          <p class="article-card__excerpt rte-width article-description mobile-description">
+            {%- if article.excerpt.size > 0 -%}
+              {{ article.excerpt | strip_html | truncatewords: 30 }}
+            {%- else -%}
+              {{ article.content | strip_html | truncatewords: 30 }}
+            {%- endif -%}
+          </p>
+        {%- endif -%}
+        <a href="{{ article.url }}" class="article-button">Daha Fazla</a>
+      </div>
+    </div>
+  </div>
+</div>
+{%- else -%}
+<div class="col-6" style="margin-bottom:60px">
+  <div class="row g-4">
+    <div class="col-12">
+      <img
+        srcset="{%- if article.image.src.width >= 165 -%}{{ article.image.src | img_url: '165x' }} 165w,{%- endif -%}
+          {%- if article.image.src.width >= 360 -%}{{ article.image.src | img_url: '360x' }} 360w,{%- endif -%}
+          {%- if article.image.src.width >= 533 -%}{{ article.image.src | img_url: '533x' }} 533w,{%- endif -%}
+          {%- if article.image.src.width >= 720 -%}{{ article.image.src | img_url: '720x' }} 720w,{%- endif -%}
+          {%- if article.image.src.width >= 1000 -%}{{ article.image.src | img_url: '1000x' }} 1000w,{%- endif -%}
+          {%- if article.image.src.width >= 1500 -%}{{ article.image.src | img_url: '1500x' }} 1500w,{%- endif -%}
+          {{ article.image.src | img_url: 'master' }} {{ article.image.src.width }}w"
+        src="{{ article.image.src | img_url: '533x' }}"
+        sizes="(min-width: {{ settings.page_width }}px) {{ settings.page_width | minus: 100 | divided_by: 2 }}px, (min-width: 750px) calc((100vw - 130px) / 2), calc((100vw - 50px) / 2)"
+        alt="{{ article.image.src.alt | escape }}"
+        width="100%"
+        loading="lazy"
+        class="motion-reduce"
+      >
+    </div>
+    <div class="col-12">
+      <span class="circle-divider caption-with-letter-spacing article-date">
+        {{- article.published_at | time_tag: format: 'date' -}}
+      </span>
+      <h2 class="article-card__title article-title" id="Article-{{ article.id }}">
+        {{ article.title | escape }}
+      </h2>
+      {%- if article.excerpt.size > 0 or article.content.size > 0 -%}
+        <p class="article-card__excerpt rte-width article-description article-alt desktop-description">
+          {%- if article.excerpt.size > 0 -%}
+            {{ article.excerpt | strip_html | truncatewords: 100 }}
+          {%- else -%}
+            {{ article.content | strip_html | truncatewords: 100 }}
+          {%- endif -%}
+        </p>
+      {%- endif -%}
+      {%- if article.excerpt.size > 0 or article.content.size > 0 -%}
+        <p class="article-card__excerpt rte-width article-description article-alt mobile-description">
+          {%- if article.excerpt.size > 0 -%}
+            {{ article.excerpt | strip_html | truncatewords: 30 }}
+          {%- else -%}
+            {{ article.content | strip_html | truncatewords: 30 }}
+          {%- endif -%}
+        </p>
+      {%- endif -%}
+      <a href="{{ article.url }}" class="article-button">Daha Fazla</a>
+    </div>
+  </div>
+</div>
+{%- endif -%}
