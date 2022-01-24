@@ -1,0 +1,249 @@
+<div class="{% unless section.settings.full_width %}page-width{% endunless %}">
+  {%- for block in section.blocks -%}
+    <div class="row g-4 gy-4" style="margin-top:0px">
+    {%- if block.type == "row-12" -%}
+    
+        <div  class="col-12">
+          <a href="{{ block.settings.link-1}}">
+            <img 
+              id="image"
+              width="100%" 
+              srcset="{%- if block.settings.image-1.width >= 375 -%}{{ block.settings.image-1 | img_url: '375x' }} 375w,{%- endif -%}
+              {%- if block.settings.image-1.width >= 550 -%}{{ block.settings.image-1 | img_url: '550x' }} 550w,{%- endif -%}
+              {%- if block.settings.image-1.width >= 750 -%}{{ block.settings.image-1 | img_url: '750x' }} 750w,{%- endif -%}
+              {%- if block.settings.image-1.width >= 1100 -%}{{ block.settings.image-1 | img_url: '1100x' }} 1100w,{%- endif -%}
+              {%- if block.settings.image-1.width >= 1500 -%}{{ block.settings.image-1 | img_url: '1500x' }} 1500w,{%- endif -%}
+              {%- if block.settings.image-1.width >= 1780 -%}{{ block.settings.image-1 | img_url: '1780x' }} 1780w,{%- endif -%}
+              {%- if block.settings.image-1.width >= 2000 -%}{{ block.settings.image-1 | img_url: '2000x' }} 2000w,{%- endif -%}
+              {%- if block.settings.image-1.width >= 3000 -%}{{ block.settings.image-1 | img_url: '3000x' }} 3000w,{%- endif -%}
+              {%- if block.settings.image-1.width >= 3840 -%}{{ block.settings.image-1 | img_url: '3840x' }} 3840w,{%- endif -%}
+              {{ block.settings.image-1 | img_url: 'master' }} {{ block.settings.image-1.width }}w"
+              sizes="100vw"
+              src="{{ block.settings.image-1 | img_url: '1500x' }}"
+              loading="lazy"
+              alt="{{ block.settings.image-1.alt | escape }}"
+            >
+          </a>
+        </div>
+    
+    {%- endif -%}
+    
+    {%- if block.type == "row-6" -%}
+    
+        <div class="col-6">
+          <a href="{{ block.settings.link-1}}">
+            <img 
+              id="image"
+              width="100%" 
+              srcset="{%- if block.settings.image-1.width >= 375 -%}{{ block.settings.image-1 | img_url: '375x' }} 375w,{%- endif -%}
+              {%- if block.settings.image-1.width >= 550 -%}{{ block.settings.image-1 | img_url: '550x' }} 550w,{%- endif -%}
+              {%- if block.settings.image-1.width >= 750 -%}{{ block.settings.image-1 | img_url: '750x' }} 750w,{%- endif -%}
+              {%- if block.settings.image-1.width >= 1100 -%}{{ block.settings.image-1 | img_url: '1100x' }} 1100w,{%- endif -%}
+              {%- if block.settings.image-1.width >= 1500 -%}{{ block.settings.image-1 | img_url: '1500x' }} 1500w,{%- endif -%}
+              {%- if block.settings.image-1.width >= 1780 -%}{{ block.settings.image-1 | img_url: '1780x' }} 1780w,{%- endif -%}
+              {%- if block.settings.image-1.width >= 2000 -%}{{ block.settings.image-1 | img_url: '2000x' }} 2000w,{%- endif -%}
+              {%- if block.settings.image-1.width >= 3000 -%}{{ block.settings.image-1 | img_url: '3000x' }} 3000w,{%- endif -%}
+              {%- if block.settings.image-1.width >= 3840 -%}{{ block.settings.image-1 | img_url: '3840x' }} 3840w,{%- endif -%}
+              {{ block.settings.image-1 | img_url: 'master' }} {{ block.settings.image-1.width }}w"
+              sizes="100vw"
+              src="{{ block.settings.image-1 | img_url: '1500x' }}"
+              loading="lazy"
+              alt="{{ block.settings.image-1.alt | escape }}"
+            >
+          </a>
+        </div>    
+        <div  class="col-6">
+          <a href="{{ block.settings.link-2}}">
+            <img 
+              id="image"
+              width="100%" 
+              srcset="{%- if block.settings.image-2.width >= 375 -%}{{ block.settings.image-2 | img_url: '375x' }} 375w,{%- endif -%}
+              {%- if block.settings.image-2.width >= 550 -%}{{ block.settings.image-2 | img_url: '550x' }} 550w,{%- endif -%}
+              {%- if block.settings.image-2.width >= 750 -%}{{ block.settings.image-2 | img_url: '750x' }} 750w,{%- endif -%}
+              {%- if block.settings.image-2.width >= 1100 -%}{{ block.settings.image-2 | img_url: '1100x' }} 1100w,{%- endif -%}
+              {%- if block.settings.image-2.width >= 1500 -%}{{ block.settings.image-2 | img_url: '1500x' }} 1500w,{%- endif -%}
+              {%- if block.settings.image-2.width >= 1780 -%}{{ block.settings.image-2 | img_url: '1780x' }} 1780w,{%- endif -%}
+              {%- if block.settings.image-2.width >= 2000 -%}{{ block.settings.image-2 | img_url: '2000x' }} 2000w,{%- endif -%}
+              {%- if block.settings.image-2.width >= 3000 -%}{{ block.settings.image-2 | img_url: '3000x' }} 3000w,{%- endif -%}
+              {%- if block.settings.image-2.width >= 3840 -%}{{ block.settings.image-2 | img_url: '3840x' }} 3840w,{%- endif -%}
+              {{ block.settings.image-2 | img_url: 'master' }} {{ block.settings.image-2.width }}w"
+              sizes="100vw"
+              src="{{ block.settings.image-2 | img_url: '1500x' }}"
+              loading="lazy"
+              alt="{{ block.settings.image-2.alt | escape }}"
+            >
+          </a>
+        </div>
+    
+    {%- endif -%}
+    {%- if block.type == "row-4" -%}
+      
+          <div class="col-4"> 
+            <a href="{{ block.settings.link-1}}">
+              <img 
+                id="image"
+                width="100%" 
+                srcset="{%- if block.settings.image-1.width >= 375 -%}{{ block.settings.image-1 | img_url: '375x' }} 375w,{%- endif -%}
+                {%- if block.settings.image-1.width >= 550 -%}{{ block.settings.image-1 | img_url: '550x' }} 550w,{%- endif -%}
+                {%- if block.settings.image-1.width >= 750 -%}{{ block.settings.image-1 | img_url: '750x' }} 750w,{%- endif -%}
+                {%- if block.settings.image-1.width >= 1100 -%}{{ block.settings.image-1 | img_url: '1100x' }} 1100w,{%- endif -%}
+                {%- if block.settings.image-1.width >= 1500 -%}{{ block.settings.image-1 | img_url: '1500x' }} 1500w,{%- endif -%}
+                {%- if block.settings.image-1.width >= 1780 -%}{{ block.settings.image-1 | img_url: '1780x' }} 1780w,{%- endif -%}
+                {%- if block.settings.image-1.width >= 2000 -%}{{ block.settings.image-1 | img_url: '2000x' }} 2000w,{%- endif -%}
+                {%- if block.settings.image-1.width >= 3000 -%}{{ block.settings.image-1 | img_url: '3000x' }} 3000w,{%- endif -%}
+                {%- if block.settings.image-1.width >= 3840 -%}{{ block.settings.image-1 | img_url: '3840x' }} 3840w,{%- endif -%}
+                {{ block.settings.image-1 | img_url: 'master' }} {{ block.settings.image-1.width }}w"
+                sizes="100vw"
+                src="{{ block.settings.image-1 | img_url: '1500x' }}"
+                loading="lazy"
+                alt="{{ block.settings.image-1.alt | escape }}"
+              >
+            </a>
+          </div>
+          <div class="col-4">
+            <a href="{{ block.settings.link-2}}">
+              <img 
+                id="image"
+                width="100%" 
+                srcset="{%- if block.settings.image-2.width >= 375 -%}{{ block.settings.image-2 | img_url: '375x' }} 375w,{%- endif -%}
+                {%- if block.settings.image-2.width >= 550 -%}{{ block.settings.image-2 | img_url: '550x' }} 550w,{%- endif -%}
+                {%- if block.settings.image-2.width >= 750 -%}{{ block.settings.image-2 | img_url: '750x' }} 750w,{%- endif -%}
+                {%- if block.settings.image-2.width >= 1100 -%}{{ block.settings.image-2 | img_url: '1100x' }} 1100w,{%- endif -%}
+                {%- if block.settings.image-2.width >= 1500 -%}{{ block.settings.image-2 | img_url: '1500x' }} 1500w,{%- endif -%}
+                {%- if block.settings.image-2.width >= 1780 -%}{{ block.settings.image-2 | img_url: '1780x' }} 1780w,{%- endif -%}
+                {%- if block.settings.image-2.width >= 2000 -%}{{ block.settings.image-2 | img_url: '2000x' }} 2000w,{%- endif -%}
+                {%- if block.settings.image-2.width >= 3000 -%}{{ block.settings.image-2 | img_url: '3000x' }} 3000w,{%- endif -%}
+                {%- if block.settings.image-2.width >= 3840 -%}{{ block.settings.image-2 | img_url: '3840x' }} 3840w,{%- endif -%}
+                {{ block.settings.image-2 | img_url: 'master' }} {{ block.settings.image-2.width }}w"
+                sizes="100vw"
+                src="{{ block.settings.image-2 | img_url: '1500x' }}"
+                loading="lazy"
+                alt="{{ block.settings.image-2.alt | escape }}"
+              >
+            </a>
+          </div>
+       
+          <div class="col-4">
+            <a href="{{ block.settings.link-3}}">
+              <img 
+                id="image"
+                width="100%" 
+                srcset="{%- if block.settings.image-3.width >= 375 -%}{{ block.settings.image-3 | img_url: '375x' }} 375w,{%- endif -%}
+                {%- if block.settings.image-3.width >= 550 -%}{{ block.settings.image-3 | img_url: '550x' }} 550w,{%- endif -%}
+                {%- if block.settings.image-3.width >= 750 -%}{{ block.settings.image-3 | img_url: '750x' }} 750w,{%- endif -%}
+                {%- if block.settings.image-3.width >= 1100 -%}{{ block.settings.image-3 | img_url: '1100x' }} 1100w,{%- endif -%}
+                {%- if block.settings.image-3.width >= 1500 -%}{{ block.settings.image-3 | img_url: '1500x' }} 1500w,{%- endif -%}
+                {%- if block.settings.image-3.width >= 1780 -%}{{ block.settings.image-3 | img_url: '1780x' }} 1780w,{%- endif -%}
+                {%- if block.settings.image-3.width >= 2000 -%}{{ block.settings.image-3 | img_url: '2000x' }} 2000w,{%- endif -%}
+                {%- if block.settings.image-3.width >= 3000 -%}{{ block.settings.image-3 | img_url: '3000x' }} 3000w,{%- endif -%}
+                {%- if block.settings.image-3.width >= 3840 -%}{{ block.settings.image-3 | img_url: '3840x' }} 3840w,{%- endif -%}
+                {{ block.settings.image-3 | img_url: 'master' }} {{ block.settings.image-3.width }}w"
+                sizes="100vw"
+                src="{{ block.settings.image-3 | img_url: '1500x' }}"
+                loading="lazy"
+                alt="{{ block.settings.image-3.alt | escape }}"
+              >
+            </a>
+          </div>
+    
+    {%- endif -%}
+  </div>
+  {%- endfor -%}
+
+</div>
+
+{% schema %}
+{
+"name": "Vitring",
+"tag": "section",
+"settings": [
+],
+"blocks": [
+  {
+    "name": "Satır Tek",
+    "type": "row-12",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "image-1",
+        "label": "Resim"
+      },
+      {
+        "type": "url",
+        "id": "link-1",
+        "label": "URL"
+      }
+    ]
+  },
+  {
+    "name": "Satır Çift",
+    "type": "row-6",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "image-1",
+        "label": "Resim 1"
+      },
+      {
+        "type": "url",
+        "id": "link-1",
+        "label": "URL 1"
+      },
+      {
+        "type": "image_picker",
+        "id": "image-2",
+        "label": "Resim 2"
+      },
+      {
+        "type": "url",
+        "id": "link-2",
+        "label": "URL 2"
+      }
+    ]
+  },
+  {
+    "name": "Satır Üçlü",
+    "type": "row-4",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "image-1",
+        "label": "Resim 1"
+      },
+      {
+        "type": "url",
+        "id": "link-1",
+        "label": "URL 1"
+      },
+      {
+        "type": "image_picker",
+        "id": "image-2",
+        "label": "Resim 2"
+      },
+      {
+        "type": "url",
+        "id": "link-2",
+        "label": "URL 2"
+      },
+      {
+        "type": "image_picker",
+        "id": "image-3",
+        "label": "Resim 3"
+      },
+      {
+        "type": "url",
+        "id": "link-3",
+        "label": "URL 3"
+      }
+    ]
+  }
+]
+,
+
+"presets": [ {
+        "category": "Custom Content",
+        "name" : "Vitrin"
+    }
+]
+}
+{% endschema %}

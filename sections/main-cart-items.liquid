@@ -1,0 +1,171 @@
+{{ 'component-cart.css' | asset_url | stylesheet_tag }}
+{{ 'component-totals.css' | asset_url | stylesheet_tag }}
+{{ 'component-price.css' | asset_url | stylesheet_tag }}
+{{ 'component-discounts.css' | asset_url | stylesheet_tag }}
+{{ 'component-loading-overlay.css' | asset_url | stylesheet_tag }}
+
+<script src="{{ 'cart.js' | asset_url }}" defer="defer"></script>
+
+<style>
+  .cart-header {
+    font-weight: 500;
+    font-size: 22px;
+  }
+
+  .cart-item-title {
+    font-size: 14px;
+    font-weight: 400;
+    color: #0E0E0E;
+    text-decoration:none;
+    line-height: 28px;
+    cursor:pointer;
+  }
+
+  .cart-item-title:hover {
+    color: #0E0E0E;
+    opacity:0.7
+  }
+
+  .item-custom-text {
+    font-size: 14px;
+    font-weight: 400;
+    color: #0E0E0E;
+  }
+
+  .quantity-input {
+    border:none;
+    color: #0E0E0E;
+  }
+
+  .custom-input:focus-visible {
+    box-shadow:none;
+    border:none;
+    outline:none
+  }
+
+  .remove-link {
+    box-shadow:none !important;
+    border:none !important;
+    width:34px;
+    padding-left:0
+  }
+
+  .remove-link:hover {
+    box-shadow:none !important;
+    border:none !important;
+  }
+</style>
+
+<cart-items class="page-width{% if cart == empty %} is-empty{% endif %}">
+  <div class="title-wrapper-with-link">
+    <h1 class="cart-header">{{ 'sections.cart.title' | t }}</h1>
+  </div>
+
+  <div class="cart__warnings">
+    <h1 class="cart__empty-text">{{ 'sections.cart.empty' | t }}</h1>
+  </div>
+
+  <form action="{{ routes.cart_url }}" class="cart__contents critical-hidden" method="post" id="cart">
+    <div class="cart__items" id="main-cart-items" data-id="{{ section.id }}" style="border:none">
+      <div class="js-contents">
+        {%- if cart != empty -%}
+            <div class="row g-4">
+              {%- for item in cart.items -%}
+                <div class="col-12 col-md-6" id="CartItem-{{ item.index | plus: 1 }}">
+
+                  <div class="d-flex">
+                    <div class="cart-item__media" style="width:60%">
+                      {% if item.image %}
+                        {% comment %} Leave empty space due to a:empty CSS display: none rule {% endcomment %}
+                        <a href="{{ item.url }}" class="cart-item__link" aria-hidden="true" tabindex="-1"> </a>
+                        <img class=""
+                          src="{{ item.image | img_url: '300x' }}"
+                          alt="{{ item.image.alt | escape }}"
+                          loading="lazy"
+                          width="100%"
+                        >
+                      {% endif %}
+                    </div>
+
+                    <div class="d-flex flex-column" style="width:40%;padding-left:30px">
+                      <div >
+                        {%- if section.settings.show_vendor -%}
+                          <p class="caption-with-letter-spacing light">{{ item.product.vendor }}</p>
+                        {%- endif -%}
+
+                        <h2 href="{{ item.url }}" class="cart-item-title">{{ item.product.title | escape }}</h2>
+                        <span class="item-custom-text">{{ item.final_line_price | money }}</span>
+                   
+                        {%- if item.product.has_only_default_variant == false or item.properties.size != 0 or item.selling_plan_allocation != nil -%}
+                          <div class="d-flex">
+                            {%- if item.product.has_only_default_variant == false -%}
+                              {%- for option in item.options_with_values -%}
+                               
+                                  <span class="item-custom-text" style="margin-right:10px">{{ option.value }}</span>
+                              
+                              {%- endfor -%}
+                            {%- endif -%}   
+                          </div>                 
+                        {%- endif -%}
+                        
+                      </div>
+
+                      <div class="cart-item__quantity">
+                        <div class="cart-item__quantity-wrapper d-flex flex-column">
+                          <quantity-input class="quantity quantity-input" style="width:80px">
+                            <button class="quantity__button no-js-hidden" name="minus" type="button" style="width:auto">
+                              <span class="visually-hidden">{{ 'products.product.quantity.decrease' | t: product: item.product.title | escape }}</span>
+                              <img src="{{ 'minus.png' | asset_url}}" alt="" name="minus">
+                            </button>
+                            <input class="quantity__input custom-input"
+                              type="number"
+                              name="updates[]"
+                              value="{{ item.quantity }}"
+                              min="0"
+                              aria-label="{{ 'products.product.quantity.input_label' | t: product: item.product.title | escape }}"
+                              id="Quantity-{{ item.index | plus: 1 }}"
+                              data-index="{{ item.index | plus: 1 }}"
+                            >
+                            <button class="quantity__button no-js-hidden" name="plus" type="button" style="width:auto">
+                              <span class="visually-hidden">{{ 'products.product.quantity.increase' | t: product: item.product.title | escape }}</span>
+                              <img src="{{ 'plus.png'  | asset_url}}" alt="" name="plus">
+                            </button>
+                          </quantity-input>
+
+                         
+                            <a style="min-width:unset" href="{{ item.url_to_remove }}" class="button button--tertiary remove-link" aria-label="{{ 'sections.cart.remove_title' | t: title: item.title }}">
+                              <img src="{{ 'delete.png'  | asset_url}}" alt="">
+                            </a>
+                          
+                       
+                        </div>
+                      </div>
+
+                    </div>
+
+                  </div>
+                </div>
+              {%- endfor -%}
+            </div>
+        {%- endif -%}
+      </div>
+    </div>
+
+    <p class="visually-hidden" id="cart-live-region-text" aria-live="polite" role="status"></p>
+    <p class="visually-hidden" id="shopping-cart-line-item-status" aria-live="polite" aria-hidden="true" role="status">{{ 'accessibility.loading' | t }}</p>
+  </form>
+</cart-items>
+
+{% schema %}
+{
+  "name": "t:sections.main-cart-items.name",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_vendor",
+      "default": false,
+      "label": "t:sections.main-cart-items.settings.show_vendor.label"
+    }
+  ]
+}
+{% endschema %}

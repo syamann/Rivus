@@ -1,0 +1,52 @@
+{{ 'component-article-card.css' | asset_url | stylesheet_tag }}
+{{ 'component-card.css' | asset_url | stylesheet_tag }}
+{{ 'section-main-blog.css' | asset_url | stylesheet_tag }}
+
+<style>
+  .title-custom {
+    text-align:center;
+    font-size: 22px;
+    font-weight:700;
+    line-height:36px;
+    color:#0E0E0E;
+  }
+
+  .pagination__list  {
+    width:100% 
+  }
+</style>
+
+
+
+{%- paginate blog.articles by 5 -%}
+
+  <div class="main-blog page-width">
+    <h1 class="title--primary title-custom">{{ blog.title | escape }}</h1>
+
+    <div class="row g-6" style="margin-top:50px">
+      {%- for article in blog.articles -%}
+      
+          {%- render 'article-card', article: article, index: forloop.index -%}
+      
+      {%- endfor -%}
+    </div>
+
+    {%- if paginate.pages > 1 -%}
+      {%- render 'pagination', paginate: paginate -%}
+    {%- endif -%}
+  </div>
+{%- endpaginate -%}
+
+{% schema %}
+{
+  "name": "t:sections.main-blog.name",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "t:sections.main-blog.settings.header.content"
+    }
+  ]
+}
+{% endschema %}
+

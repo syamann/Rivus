@@ -1,0 +1,109 @@
+
+<style>
+    .video-container {
+        display: flex;
+        width: 100%;
+        overflow: hidden;
+        justify-content: center;
+        align-items: center;
+      
+        }
+        
+        .video-container video{
+        width: 100%;
+        height: auto;
+        }
+        
+        
+        .only-mobile {
+        display: none;
+        }
+        
+        .only-desktop {
+        display: block;
+        }
+        
+        @media (max-width: 479px) {
+        .only-mobile {
+            display: block;
+        }
+        
+        .only-desktop {
+            display: none;
+        }
+        .video-container {
+      
+        }
+        .video-container video{
+     
+        width: auto;
+        }
+        }
+</style>
+<div class="page-width" style="margin-top:30px">
+<div class="only-mobile">
+    {% if section.settings.show_mobile_video %}
+<div class="video-container">
+        <video class="only-mobile" id="main-video" autoplay loop muted playsinline style="width:100%">
+            <source src="{{ section.settings.video_url_mobile | file_url }}" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+</div>
+{% else %}
+<div>
+    <img src="{{ section.settings.image_mobile | img_url: 'master' }}" alt="">
+</div>
+
+{% endif %}	
+</div>
+<div class="only-desktop">
+<div class="video-container">
+  <video id="main-video" autoplay loop muted playsinline>
+            <source src="{{ section.settings.video_url_desktop | file_url }}" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+</div>
+</div>
+</div>
+{% schema %}
+{
+"name": "Video Slider 1",
+"tag": "section",
+"settings": [
+    {
+        "type":      "text",
+        "id":        "video_url_desktop",
+        "label":     "Video Url (Desktop)",
+        "default":   "banner_video1.mp4",
+        "info":      "Name of the video (uploaded to Files in admin panel ) ",
+        "placeholder": "banner_video1.mp4"        
+            },
+            {
+                "type": "checkbox",
+                "id": "show_mobile_video",
+                "label": "Should show mobile video?",
+                "default": false,
+                "info": "If selected, video on mobile will be shown"
+            },
+            {
+                "type":      "text",
+                "id":        "video_url_mobile",
+                "label":     "Video Url (Mobile)",
+                "default":   "banner_video1.mp4",
+                "info":      "Name of the video (uploaded to Files in admin panel ) ",
+                "placeholder": "banner_video1.mp4"        
+        },
+        {
+            "type": "image_picker",
+            "id": "image_mobile",
+            "label": "Banner Image for Mobile (if not video selected)"
+        }
+],
+
+"presets": [ {
+        "category": "Custom Content",
+        "name" : "Video Slider 1"
+    }
+]
+}
+{% endschema %}
